@@ -1,9 +1,7 @@
+require('dotenv').config()
 const express = require('express')
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
 const connectDB = require('./db/connectDB')
-
-dotenv.config()
+const userRouter = require('./routes/user.route')
 
 const app = express()
 const PORT = process.env.PORT || 3500
@@ -12,6 +10,7 @@ app.use(express.json())
 app.get("/", (req, res) => {
     res.send("Hello World from map project")
 })
+app.use("/api/v1/users", userRouter)
 
 app.listen(PORT, () => {
     connectDB()
