@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const connectDB = require('./db/connectDB')
+const { validateRequest } = require('./utils')
 const userRouter = require('./routes/user.route')
 
 const app = express()
@@ -11,6 +12,8 @@ app.get("/", (req, res) => {
     res.send("Hello World from map project")
 })
 app.use("/api/v1/users", userRouter)
+
+app.use(validateRequest)
 
 app.listen(PORT, () => {
     connectDB()
