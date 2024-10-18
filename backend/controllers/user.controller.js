@@ -43,6 +43,46 @@ const createUser = async (req, res) => {
     }
 }
 
+const loginUser = async (req, res) => {
+    try {
+        const userService = new UserService()
+        const { username, password } = req.body
+
+        // find existed user by username
+        const existedUser = await userService.getExistedUserByUserName(username)
+        if (!existedUser) {
+            return res.status(400).json({
+                success: false,
+                message: "USER_NOT_FOUND",
+                error: "User is not existed",
+            })
+        }
+
+        // Validate password
+        const validPassword = await bcrypt.compare(password, existedUser.password)
+        if (!validPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "INVALID_PASSWORD",
+                error: "Invalid password",
+            })
+        }
+
+        res.status(200).json({
+            user: { id: existedUser._id, username: existedUser.username },
+            success: true,
+            message: "USER_LOGIN_SUCCESS",
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "USER_LOGIN_FAIL",
+            error: error.message,
+        })
+    }
+}
+
 module.exports = {
     createUser,
+    loginUser,
 }
