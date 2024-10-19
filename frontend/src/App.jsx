@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import Map, { Marker } from 'react-map-gl/maplibre';
+import Map, { Marker, NavigationControl } from 'react-map-gl';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 const App = () => {
 
@@ -15,7 +17,6 @@ const App = () => {
 
   const handleAddPlaceOnDblClick = (e) => {
     const { lng, lat } = e.lngLat
-
     console.log(`lng: ${lng}, lat: ${lat}`)
     setNewPlace({
       latitude: lat,
@@ -24,22 +25,21 @@ const App = () => {
   }
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div>
       <Map
+        mapLib={maplibregl}
         initialViewState={viewPort}
         style={{ width: "100%", height: "100vh" }}
         mapStyle={MY_MAPTILER_KEY}
         onDblClick={handleAddPlaceOnDblClick}
       >
+        <NavigationControl position="top-left" />
         {newPlace && (
           <Marker
             longitude={newPlace.longitude}
             latitude={newPlace.latitude}
-            offsetLeft={-3.5 * viewPort.zoom}
-            offsetTop={-7 * viewPort.zoom}
-          // anchor='bottom'
           >
-            <img src="pin.png" alt="marker" style={{ fontSize: 7 * viewPort.zoom }} />
+            <img src="pin.png" alt="marker" style={{ width: 30, height: 30 }} />
           </Marker>
         )}
       </Map>
