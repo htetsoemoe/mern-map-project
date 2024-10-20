@@ -2,13 +2,13 @@ const PinService = require("../services/pin.service")
 
 const createPin = async (req, res) => {
     try {
+        const pinData = req.body
+        
         const pinService = new PinService()
-        const { username, title, description, rating, lat, lng } = req.body
-        console.log(`${username} ${title} ${description} ${rating} ${lat} ${lng}`)
+        const savedPin = await pinService.createPin(pinData)
 
-        await pinService.testing()
         res.status(201).json({
-            data: "Create pin successfully",
+            data: savedPin,
             success: true,
         })
     } catch (error) {
