@@ -9,11 +9,7 @@ module.exports = class PinService {
             pinSchemaModel
         )
     }
-
-    async testing() {
-        console.log("Pin service is working")
-    }
-
+    
     async createPin(pinData) {
         return this.pinModel.create(pinData)
     }

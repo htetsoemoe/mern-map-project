@@ -39,7 +39,7 @@ const App = () => {
             longitude={newPlace.longitude}
             latitude={newPlace.latitude}
           >
-            <img src="pin.png" alt="marker" style={{ width: 30, height: 30 }} />
+            <img src="store.png" alt="marker" style={{ width: 30, height: 30 }} />
           </Marker>
         )}
       </Map>
