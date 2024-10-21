@@ -81,12 +81,18 @@ const App = () => {
                 closeOnClick={false}
                 anchor='left'
               >
-                <div style={{ backgroundColor: 'cyan', padding: 10, borderRadius: 10 }}>
-                  <h3>{pin.title}</h3>
-                  <p style={{ fontWeight: 'bold' }}>{pin.description}</p>
-                  {Array(pin.rating).fill(<img src='star.png' alt='star' style={{ width: 20, height: 20 }} />)}
-                  <p style={{ fontWeight: 'bold' }}>Created by {pin.username}</p>
-                  <p style={{ fontWeight: 'bold' }}>{format(pin.updatedAt)}</p>
+                <div style={{ backgroundColor: 'rgba(100, 0, 0, 0)', padding: 10, borderRadius: 10 }}>
+                  <h4>{pin.title}</h4>
+                  <hr />
+                  <div style={{ marginBottom: 15 }}>
+                    <p style={{ fontWeight: 'bold', fontSize: '18px' }}>{pin.description}</p>
+                    {Array(pin.rating).fill(<img src='star.png' alt='star' style={{ width: 20, height: 20 }} />)}
+                  </div>
+                  <hr />
+                  <div style={{ marginTop: 20 }}>
+                    <p style={{ fontWeight: 'bold', fontSize: '11px' }}>Created by {pin.username}</p>
+                    <p style={{ fontWeight: 'bold', fontSize: '11px' }}>{format(pin.updatedAt)}</p>
+                  </div>
                 </div>
               </Popup>
             )}
